@@ -4,7 +4,6 @@ PyMuPDF
 langchain
 langchain-community
 pinecone-client
-pinecone-plugin-inference
 langchain-pinecone
 python-dotenv
 langchain-groq
