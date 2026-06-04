@@ -3,11 +3,12 @@ requests
 PyMuPDF
 langchain
 langchain-community
-chromadb
+pinecone-client
+pinecone-plugin-inference
+langchain-pinecone
 python-dotenv
 langchain-groq
 tiktoken
-sentence-transformers
 fastapi
 uvicorn
 apscheduler

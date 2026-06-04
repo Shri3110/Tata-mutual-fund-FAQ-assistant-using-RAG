@@ -1,14 +1,8 @@
 import os
 from datetime import datetime
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma
-# Note: In a production environment, use a robust embedding model like OpenAIEmbeddings or HuggingFaceEmbeddings.
-# Here we'll configure a placeholder or a lightweight open-source embedding if possible.
-from langchain_community.embeddings import HuggingFaceEmbeddings
-import chromadb
-
-# Ensure ChromaDB uses a local directory for persistence
-CHROMA_DB_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "chroma_db")
+from langchain_pinecone import PineconeVectorStore, PineconeEmbeddings
+from pinecone import Pinecone, ServerlessSpec
 
 def chunk_text(text: str, source_url: str) -> list:
     """
@@ -40,41 +34,42 @@ def chunk_text(text: str, source_url: str) -> list:
         
     return documents
 
-def build_vector_store(documents: list, collection_name: str = "mutual_fund_facts"):
+def build_vector_store(documents: list, index_name: str = "mutual-fund-facts"):
     """
-    Initializes a ChromaDB vector store and ingests the chunked documents.
-    Dynamically selects BGE embedding model based on the volume of chunks.
+    Initializes a Pinecone vector store and ingests the chunked documents.
+    Uses Pinecone Inference API for embeddings to save local memory.
     """
-    total_chunks = len(documents)
+    api_key = os.getenv("PINECONE_API_KEY")
+    if not api_key:
+        raise ValueError("PINECONE_API_KEY environment variable is not set.")
+        
+    pc = Pinecone(api_key=api_key)
     
-    # Select embedding model based on volume. 
-    # For a large number of chunks, BGE-large provides better semantic matching.
-    # For fewer chunks, BGE-small is faster and sufficient.
-    if total_chunks > 1000:
-        model_name = "BAAI/bge-large-en-v1.5"
-        print(f"Volume is high ({total_chunks} chunks). Using {model_name} for embeddings.")
-    else:
-        model_name = "BAAI/bge-small-en-v1.5"
-        print(f"Volume is moderate ({total_chunks} chunks). Using {model_name} for embeddings.")
-
-    # Using HuggingFace's sentence transformers for BGE embeddings
-    embeddings = HuggingFaceEmbeddings(model_name=model_name)
+    model_name = "multilingual-e5-large"
+    dimension = 1024
     
-    # Format for Langchain's Chroma wrapper
+    if index_name not in pc.list_indexes().names():
+        print(f"Creating Pinecone index '{index_name}'...")
+        pc.create_index(
+            name=index_name,
+            dimension=dimension,
+            metric="cosine",
+            spec=ServerlessSpec(cloud="aws", region="us-east-1")
+        )
+        
+    embeddings = PineconeEmbeddings(model=model_name, pinecone_api_key=api_key)
+    
     texts = [doc["page_content"] for doc in documents]
     metadatas = [doc["metadata"] for doc in documents]
     
-    # Initialize the Vector Store
-    vectorstore = Chroma.from_texts(
+    vectorstore = PineconeVectorStore.from_texts(
         texts=texts,
         embedding=embeddings,
         metadatas=metadatas,
-        collection_name=collection_name,
-        persist_directory=CHROMA_DB_DIR
+        index_name=index_name
     )
     
-    vectorstore.persist()
-    print(f"Successfully ingested {len(texts)} chunks into ChromaDB collection '{collection_name}' at {CHROMA_DB_DIR}")
+    print(f"Successfully ingested {len(texts)} chunks into Pinecone index '{index_name}'")
     return vectorstore
 
 if __name__ == "__main__":

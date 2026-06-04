@@ -14,19 +14,19 @@ This document outlines the phase-wise implementation strategy to build the facts
 
 ## Proposed Changes
 
-### Phase 1: Setup & Offline Data Ingestion Pipeline
+### Phase 1: Setup & Offline Data Ingestion Pipeline (Pinecone Migration)
 **Goal:** Establish the foundational knowledge base using the 5 selected Groww URLs and official documents.
 *   **Initialize Project:** Set up the Python virtual environment and core dependencies.
 *   **Web Scraper & PDF Parser:** Implement scripts to fetch the Groww URLs, KIM, SID, and Factsheets.
 *   **Semantic Chunking:** Implement a text splitter that divides documents logically and attaches metadata (`source_url`, `last_updated_date`, etc.).
-*   **Vector Database:** Configure a local instance of ChromaDB and generate embeddings using a dynamically selected BGE model (`BAAI/bge-large-en-v1.5` or `bge-small-en-v1.5`).
+*   **Vector Database:** Configure Pinecone Serverless as the vector database, replacing local ChromaDB to avoid OOM memory crashes on Railway. Use `multilingual-e5-large` via Pinecone Inference API for embeddings instead of local HuggingFace models.
 *   *Output:* A populated vector database ready for queries.
 
 ---
 
-### Phase 2: Core RAG & Generation Pipeline
+### Phase 2: Core RAG & Generation Pipeline (Serverless Update)
 **Goal:** Connect the vector database to the LLM and enforce the strict response constraints.
-*   **Retrieval Logic:** Implement a Two-Stage Retrieval pipeline: Dense search using Vector DB (Top-15) followed by Cross-Encoder Re-ranking (Top-3) to ensure maximum factual precision.
+*   **Retrieval Logic:** Implement Dense search using Pinecone Vector DB (Top-5). Drop the local Cross-Encoder re-ranker to further prevent memory issues on the 500MB Railway free tier container.
 *   **Strict Prompt Builder:** Create the system prompt enforcing the 3-sentence limit, single citation requirement, and the "Last updated from sources: <date>" footer.
 *   **LLM Integration:** Connect to Groq's high-speed inference engine (e.g., Llama-3-70B) with temperature set to `0.0`.
 *   *Output:* A functional backend script that can accurately answer factual queries based *only* on the ingested corpus.
