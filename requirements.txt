@@ -1,0 +1,14 @@
+beautifulsoup4
+requests
+PyMuPDF
+langchain
+langchain-community
+chromadb
+python-dotenv
+langchain-groq
+tiktoken
+sentence-transformers
+fastapi
+uvicorn
+apscheduler
+pytz

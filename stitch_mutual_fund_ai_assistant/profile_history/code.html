@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Profile | FundExpert</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#131b2e",
+                      "tertiary-container": "#001a42",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#004395",
+                      "inverse-primary": "#bec6e0",
+                      "inverse-on-surface": "#eaf1ff",
+                      "secondary-fixed": "#6ffbbe",
+                      "on-surface": "#0b1c30",
+                      "surface": "#f8f9ff",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed-dim": "#4edea3",
+                      "on-secondary-container": "#00714d",
+                      "on-error": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#6cf8bb",
+                      "surface-variant": "#d3e4fe",
+                      "outline-variant": "#c6c6cd",
+                      "on-secondary-fixed": "#002113",
+                      "surface-dim": "#cbdbf5",
+                      "primary-fixed": "#dae2fd",
+                      "error": "#ba1a1a",
+                      "inverse-surface": "#213145",
+                      "secondary": "#006c49",
+                      "surface-bright": "#f8f9ff",
+                      "on-tertiary-container": "#3980f4",
+                      "on-surface-variant": "#45464d",
+                      "surface-container": "#e5eeff",
+                      "on-background": "#0b1c30",
+                      "surface-container-highest": "#d3e4fe",
+                      "on-tertiary-fixed": "#001a42",
+                      "tertiary": "#000000",
+                      "tertiary-fixed": "#d8e2ff",
+                      "tertiary-fixed-dim": "#adc6ff",
+                      "surface-container-high": "#dce9ff",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "on-primary-container": "#7c839b",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed-variant": "#005236",
+                      "primary-container": "#131b2e",
+                      "surface-tint": "#565e74",
+                      "on-error-container": "#93000a",
+                      "outline": "#76777d",
+                      "surface-container-low": "#eff4ff",
+                      "primary-fixed-dim": "#bec6e0",
+                      "primary": "#000000",
+                      "on-tertiary": "#ffffff",
+                      "background": "#f8f9ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "1.5rem",
+                      "lg": "2.5rem",
+                      "base": "4px",
+                      "xl": "4rem",
+                      "gutter": "24px",
+                      "sm": "1rem",
+                      "xs": "0.5rem",
+                      "container-max": "1200px"
+              },
+              "fontFamily": {
+                      "caption-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "title-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "caption-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-on-primary-fixed flex items-center justify-between px-gutter w-full h-16 fixed top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed hover:bg-surface-container dark:hover:bg-primary-container p-2 rounded-full transition-colors active:scale-95 duration-150" data-icon="menu">menu</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface dark:text-on-primary font-bold">FundExpert</h1>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-label-md text-label-md text-on-surface-variant hidden md:block">Active Session</span>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border-2 border-surface">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="A professional and friendly portrait of a middle-aged male financial advisor with a warm smile, set against a blurred modern office background with soft daylight. The aesthetic is clean and high-fidelity, reflecting stability and expert knowledge in a minimalist corporate environment. The lighting is soft and flattering, emphasizing reliability." src="https://lh3.googleusercontent.com/aida/AP1WRLsjWD7qIdlBeww3GHMaeb4ONJSXJudp33NoXqb1X0rnmENM5BRZUycE6LRxoSzZGlAPO1Ljgvxlm9MXupo-WY-Kg-beQi4NluJXrY0_GPWEh6zqmc3LcOwNWdXBd2bOvp8w5vRAjgvfwpBI3wEauDIzAvk0woTIUb7rKprl27GEsftEeDD_D_k_1Y0IHZ6kGadKmtMl4n_0IukqH7AVo0jdvKpMuSjLpLD70WIGp_4eAlsYejCW6YDl7Ew"/>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-24 px-4 md:px-0 max-w-screen-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Left Column: User Overview -->
+<div class="md:col-span-4 space-y-6">
+<!-- Profile Card -->
+<section class="bg-white rounded-xl p-6 shadow-[0_4px_12px_rgba(15,23,42,0.05)] border border-outline-variant/30 text-center">
+<div class="w-24 h-24 rounded-full bg-surface-container mx-auto mb-4 p-1 border-2 border-secondary-container">
+<img alt="User" class="w-full h-full object-cover rounded-full" data-alt="A professional portrait of a man in a crisp white shirt, representing a client in a high-end financial environment. The background is a minimalist studio setting with soft grey tones. The lighting is clean and professional, matching a modern corporate aesthetic of transparency and growth." src="https://lh3.googleusercontent.com/aida/AP1WRLv2mXYKfbMlQNWq5pdt6MQ3icoiL_MVz3FCklg6xUpbRIfsdcP-cHUU5Pzr5Vdlu0hDV-rrXOPpV3w9J6P4fCjpCesLyVCVt0iEd20tRou8DIpQQYrqT6jMQWYfy1KA3dvYPZhWFi9P0wwD0QsyFfzz-Bwchzt8XPJxmR5dnwAg-ligzvEMt8LIDHdbW_9aL2-v2kDj5OPPMam_pRBc8kV1m1ihoX_UvE7NhM6bNEslMsIUKX1fH0yN65E"/>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">Alex Thompson</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Member since Oct 2023</p>
+<div class="inline-flex items-center px-4 py-1.5 bg-secondary-container text-on-secondary-container rounded-full gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-label-md text-label-md">Intermediate Investor</span>
+</div>
+</section>
+<!-- Knowledge Progress -->
+<section class="bg-white rounded-xl p-6 shadow-[0_4px_12px_rgba(15,23,42,0.05)] border border-outline-variant/30">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-4">Knowledge Level</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<span class="font-body-md text-body-md">Financial Literacy</span>
+<span class="font-title-md text-title-md text-secondary">68%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-2">
+<div class="bg-secondary h-2 rounded-full" style="width: 68%"></div>
+</div>
+<p class="font-caption-sm text-caption-sm text-on-surface-variant">You've mastered the basics of Expense Ratios and NAV. Next: Portfolio Diversification.</p>
+</div>
+</section>
+</div>
+<!-- Right Column: History & Settings -->
+<div class="md:col-span-8 space-y-6">
+<!-- Recent Inquiries -->
+<section class="bg-white rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(15,23,42,0.05)] border border-outline-variant/30">
+<div class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center">
+<h3 class="font-title-md text-title-md">Recent Inquiries</h3>
+<button class="text-on-tertiary-container font-label-md text-label-md hover:underline">View All</button>
+</div>
+<ul class="divide-y divide-outline-variant/20">
+<li class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex gap-4 items-start">
+<span class="material-symbols-outlined text-on-surface-variant mt-1" data-icon="chat_bubble">chat_bubble</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">"What is the current exit load for index funds?"</p>
+<p class="font-caption-sm text-caption-sm text-on-surface-variant">2 hours ago • Expert Assistant</p>
+</div>
+</li>
+<li class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex gap-4 items-start">
+<span class="material-symbols-outlined text-on-surface-variant mt-1" data-icon="chat_bubble">chat_bubble</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">"Compare return rates for Large Cap vs Mid Cap."</p>
+<p class="font-caption-sm text-caption-sm text-on-surface-variant">Yesterday • Expert Assistant</p>
+</div>
+</li>
+<li class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex gap-4 items-start">
+<span class="material-symbols-outlined text-on-surface-variant mt-1" data-icon="chat_bubble">chat_bubble</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">"Explanation of tax implications on STCG."</p>
+<p class="font-caption-sm text-caption-sm text-on-surface-variant">3 days ago • Expert Assistant</p>
+</div>
+</li>
+</ul>
+</section>
+<!-- Saved Funds -->
+<section class="bg-white rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(15,23,42,0.05)] border border-outline-variant/30">
+<div class="px-6 py-4 border-b border-outline-variant/20">
+<h3 class="font-title-md text-title-md">Saved Funds</h3>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6">
+<!-- Fund Card -->
+<div class="p-4 rounded-xl border border-outline-variant/50 hover:border-secondary transition-all group">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-label-md text-label-md text-on-surface group-hover:text-secondary transition-colors">BlueChip Growth Direct</h4>
+<span class="material-symbols-outlined text-secondary" data-icon="bookmark" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<p class="text-[10px] uppercase text-on-surface-variant font-bold">NAV</p>
+<p class="font-title-md text-title-md">₹142.5</p>
+</div>
+<div>
+<p class="text-[10px] uppercase text-on-surface-variant font-bold">1Y Return</p>
+<p class="font-title-md text-title-md text-secondary">+18.4%</p>
+</div>
+</div>
+</div>
+<!-- Fund Card -->
+<div class="p-4 rounded-xl border border-outline-variant/50 hover:border-secondary transition-all group">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-label-md text-label-md text-on-surface group-hover:text-secondary transition-colors">Tech Alpha Index Fund</h4>
+<span class="material-symbols-outlined text-secondary" data-icon="bookmark" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<p class="text-[10px] uppercase text-on-surface-variant font-bold">NAV</p>
+<p class="font-title-md text-title-md">₹64.2</p>
+</div>
+<div>
+<p class="text-[10px] uppercase text-on-surface-variant font-bold">1Y Return</p>
+<p class="font-title-md text-title-md text-secondary">+22.1%</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Settings -->
+<section class="bg-white rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(15,23,42,0.1)] border border-outline-variant/30">
+<div class="px-6 py-4 border-b border-outline-variant/20">
+<h3 class="font-title-md text-title-md">Account Settings</h3>
+</div>
+<div class="p-6 space-y-6">
+<!-- Notifications -->
+<div class="flex items-center justify-between">
+<div class="flex gap-4 items-center">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-medium">Push Notifications</p>
+<p class="font-caption-sm text-caption-sm text-on-surface-variant">Alerts for fund performance &amp; market news</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<!-- Data Privacy -->
+<div class="flex items-center justify-between">
+<div class="flex gap-4 items-center">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-medium">Data Privacy</p>
+<p class="font-caption-sm text-caption-sm text-on-surface-variant">Anonymize inquiry history for LLM training</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<button class="w-full py-3 bg-error-container text-on-error-container rounded-xl font-label-md text-label-md hover:bg-red-100 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span>
+                        Sign Out
+                    </button>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-on-primary-fixed shadow-[0_-4px_12px_rgba(15,23,42,0.05)] rounded-t-xl md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed-dim transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed-dim transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-label-md text-label-md">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed-dim transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label-md text-label-md">Funds</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-4 py-1 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<!-- Decorative Atmospheric Effect -->
+<div class="fixed top-0 right-0 -z-10 w-96 h-96 bg-secondary-container/20 blur-[100px] pointer-events-none"></div>
+<div class="fixed bottom-0 left-0 -z-10 w-96 h-96 bg-surface-container/30 blur-[100px] pointer-events-none"></div>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('section').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+                card.style.transition = 'transform 0.2s ease-out';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Theme Toggle simulation (Visual only)
+        console.log("UI Components Loaded Successfully");
+    </script>
+</body></html>

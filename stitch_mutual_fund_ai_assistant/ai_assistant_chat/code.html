@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FundExpert AI Assistant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#131b2e",
+                    "tertiary-container": "#001a42",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#004395",
+                    "inverse-primary": "#bec6e0",
+                    "inverse-on-surface": "#eaf1ff",
+                    "secondary-fixed": "#6ffbbe",
+                    "on-surface": "#0b1c30",
+                    "surface": "#f8f9ff",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#4edea3",
+                    "on-secondary-container": "#00714d",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#6cf8bb",
+                    "surface-variant": "#d3e4fe",
+                    "outline-variant": "#c6c6cd",
+                    "on-secondary-fixed": "#002113",
+                    "surface-dim": "#cbdbf5",
+                    "primary-fixed": "#dae2fd",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#213145",
+                    "secondary": "#006c49",
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary-container": "#3980f4",
+                    "on-surface-variant": "#45464d",
+                    "surface-container": "#e5eeff",
+                    "on-background": "#0b1c30",
+                    "surface-container-highest": "#d3e4fe",
+                    "on-tertiary-fixed": "#001a42",
+                    "tertiary": "#000000",
+                    "tertiary-fixed": "#d8e2ff",
+                    "tertiary-fixed-dim": "#adc6ff",
+                    "surface-container-high": "#dce9ff",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "on-primary-container": "#7c839b",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#005236",
+                    "primary-container": "#131b2e",
+                    "surface-tint": "#565e74",
+                    "on-error-container": "#93000a",
+                    "outline": "#76777d",
+                    "surface-container-low": "#eff4ff",
+                    "primary-fixed-dim": "#bec6e0",
+                    "primary": "#000000",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f8f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "1.5rem",
+                    "lg": "2.5rem",
+                    "base": "4px",
+                    "xl": "4rem",
+                    "gutter": "24px",
+                    "sm": "1rem",
+                    "xs": "0.5rem",
+                    "container-max": "1200px"
+            },
+            "fontFamily": {
+                    "caption-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "caption-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .chat-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .chat-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .chat-scroll::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        .expert-gradient {
+            background: linear-gradient(135deg, #131b2e 0%, #1e293b 100%);
+        }
+        .glass-blur {
+            backdrop-filter: blur(8px);
+            background: rgba(248, 249, 255, 0.8);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md overflow-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between px-gutter w-full h-16 bg-surface dark:bg-on-primary-fixed z-50 fixed top-0 left-0">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-on-surface dark:text-on-primary">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface dark:text-on-primary ml-2">FundExpert</h1>
+</div>
+<div class="flex items-center gap-sm">
+<div class="hidden md:flex gap-md">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container dark:hover:bg-primary-container transition-colors px-3 py-1 rounded-lg" href="#">Home</a>
+<a class="font-label-md text-label-md text-on-surface dark:text-on-primary font-bold px-3 py-1 rounded-lg" href="#">Chat</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container dark:hover:bg-primary-container transition-colors px-3 py-1 rounded-lg" href="#">Funds</a>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="A professional headshot of a financial advisor in a modern office. He is wearing a crisp blue shirt and smiling confidently. The background is a blurred high-end corporate office with soft natural lighting and neutral tones, creating an atmosphere of reliability and expertise." src="https://lh3.googleusercontent.com/aida/AP1WRLubH07Mtc_feyXs0WJIE7h7qqe3vgCeqL8GwauR7C2ZsMjQexCYTXYqMm_DqLejh38u1rRP3xhuZ-zvSaoR5n9T79tSr37GO2RX0UrhZG2iNwjvAPRbBp8hofP7vjvZAyWJVV7gcshqvrwfR9rZVn6WxCljCHMb6uTzt2Q0MV8vDZ-uW85zh7T-ePoGG83mCraZdkyC9mUrjFLv9O9Fcze2Em8lUYkosTV89oqwwZowapsDhvRsqusdd3Y"/>
+</div>
+</div>
+</header>
+<!-- Main Content Stage -->
+<main class="pt-16 pb-24 h-screen max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter px-gutter md:px-0">
+<!-- Left Sidebar: Recent Topics (Desktop only) -->
+<aside class="hidden md:flex md:col-span-3 flex-col pt-md space-y-md">
+<div class="p-md bg-surface-container-low rounded-xl">
+<h3 class="font-label-md text-label-md text-on-primary-fixed-variant mb-sm">HISTORY</h3>
+<div class="space-y-xs">
+<button class="w-full text-left px-sm py-xs bg-surface-container-high rounded-lg font-label-md text-label-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                        SIP vs Lump Sum
+                    </button>
+<button class="w-full text-left px-sm py-xs hover:bg-surface-container transition-colors rounded-lg font-label-md text-label-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                        ELSS Tax Benefits
+                    </button>
+<button class="w-full text-left px-sm py-xs hover:bg-surface-container transition-colors rounded-lg font-label-md text-label-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                        Retirement Goal Planning
+                    </button>
+</div>
+</div>
+<div class="p-md bg-on-primary-fixed text-on-primary rounded-xl shadow-lg relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="font-title-md text-title-md mb-xs">Pro Membership</h4>
+<p class="font-caption-sm text-caption-sm text-on-primary-container mb-md">Unlock real-time market insights and direct advisor calls.</p>
+<button class="w-full py-2 bg-secondary text-on-secondary rounded-lg font-label-md text-label-md active:scale-95 transition-transform">Upgrade Now</button>
+</div>
+<!-- Decorative element -->
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-secondary-container opacity-10 rounded-full"></div>
+</div>
+</aside>
+<!-- Chat Canvas -->
+<section class="col-span-1 md:col-span-9 flex flex-col h-full md:max-w-[720px] md:mx-auto w-full">
+<div class="flex-1 overflow-y-auto chat-scroll px-base py-md space-y-lg">
+<!-- User Message -->
+<div class="flex flex-col items-end w-full">
+<div class="max-w-[85%] bg-[#F1F5F9] text-on-primary-fixed p-md rounded-2xl rounded-tr-none shadow-[0_4px_12px_rgba(15,23,42,0.05)]">
+<p class="font-body-md text-body-md">I have ₹10 Lakhs to invest. Should I go for a Lump Sum investment or start a SIP? I'm looking for long-term growth (10+ years).</p>
+</div>
+<span class="mt-xs font-caption-sm text-caption-sm text-on-surface-variant mr-xs">10:45 AM</span>
+</div>
+<!-- Assistant Response -->
+<div class="flex flex-col items-start w-full">
+<div class="flex items-center gap-sm mb-xs">
+<div class="w-8 h-8 rounded-full expert-gradient flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-bold">Expert Advisor</span>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider">EXPERT</span>
+</div>
+<div class="max-w-[90%] bg-on-primary-fixed text-on-primary p-md rounded-2xl rounded-tl-none shadow-[0_12px_32px_rgba(15,23,42,0.1)] space-y-md">
+<p class="font-body-md text-body-md leading-relaxed">
+                            For a significant amount like ₹10 Lakhs, the decision between SIP and Lump Sum depends heavily on current market valuations. Here is an expert breakdown for your 10-year horizon:
+                        </p>
+<!-- Structured Info Card inside Chat -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+<div class="p-sm bg-primary-container border border-on-primary-fixed-variant rounded-xl">
+<h5 class="text-secondary font-bold text-label-md mb-1 uppercase tracking-tight">Systematic Transfer Plan (STP)</h5>
+<p class="text-caption-sm text-on-primary-container">Park the ₹10L in a Liquid Fund and transfer monthly. Reduces market entry risk.</p>
+</div>
+<div class="p-sm bg-primary-container border border-on-primary-fixed-variant rounded-xl">
+<h5 class="text-secondary-fixed-dim font-bold text-label-md mb-1 uppercase tracking-tight">Lump Sum Advantage</h5>
+<p class="text-caption-sm text-on-primary-container">Best if markets are in a correction phase. Maximizes time in the market.</p>
+</div>
+</div>
+<p class="font-body-md text-body-md leading-relaxed">
+                            Given the current volatile trend, I recommend an **STP (Systematic Transfer Plan)** over 6-12 months. This averages your cost while keeping the capital working in low-risk debt.
+                        </p>
+<!-- Source Chips -->
+<div class="pt-sm border-t border-on-primary-fixed-variant flex flex-wrap gap-xs">
+<span class="text-[11px] text-on-primary-container mr-2">Sources:</span>
+<div class="flex items-center gap-1 bg-primary-container px-2 py-1 rounded hover:bg-on-primary-fixed-variant transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[14px]">description</span>
+<span class="text-[11px]">SEBI Performance Data 2024</span>
+</div>
+<div class="flex items-center gap-1 bg-primary-container px-2 py-1 rounded hover:bg-on-primary-fixed-variant transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[14px]">link</span>
+<span class="text-[11px]">Historical Bull Cycle Analysis</span>
+</div>
+</div>
+</div>
+<span class="mt-xs font-caption-sm text-caption-sm text-on-surface-variant ml-xs">10:46 AM</span>
+</div>
+<!-- Suggested Actions (Chips) -->
+<div class="flex flex-wrap gap-sm justify-center pt-md">
+<button class="px-md py-2 bg-surface-container-high text-on-primary-fixed border border-outline-variant rounded-full text-label-md font-label-md hover:border-secondary transition-all">Calculate STP Returns</button>
+<button class="px-md py-2 bg-surface-container-high text-on-primary-fixed border border-outline-variant rounded-full text-label-md font-label-md hover:border-secondary transition-all">Compare Liquid Funds</button>
+<button class="px-md py-2 bg-surface-container-high text-on-primary-fixed border border-outline-variant rounded-full text-label-md font-label-md hover:border-secondary transition-all">Check Market P/E Ratio</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Input Area (Fixed) -->
+<div class="fixed bottom-0 left-0 w-full bg-surface dark:bg-on-primary-fixed border-t-0 z-50">
+<div class="max-w-[720px] mx-auto px-gutter py-md">
+<div class="relative flex items-end gap-sm bg-surface-container-lowest dark:bg-primary-container rounded-2xl shadow-lg border border-outline-variant dark:border-on-primary-fixed-variant p-2 group transition-all focus-within:ring-2 focus-within:ring-secondary/30">
+<button class="p-2 text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors active:scale-90">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 resize-none py-2 px-1 text-body-md text-on-surface dark:text-on-primary placeholder:text-outline" placeholder="Ask about expense ratios..." rows="1"></textarea>
+<div class="flex items-center gap-1 pr-1 pb-1">
+<button class="p-2 text-on-surface-variant dark:text-on-primary-container hover:text-secondary transition-colors active:scale-90">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button class="p-2 bg-secondary text-on-secondary rounded-xl hover:bg-on-secondary-fixed-variant transition-all active:scale-95 flex items-center justify-center">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<p class="text-center text-[11px] text-outline mt-xs">FundExpert can make mistakes. Verify important financial decisions.</p>
+</div>
+</div>
+<!-- Mobile Navigation Shell -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-on-primary-fixed shadow-[0_-4px_12px_rgba(15,23,42,0.05)] rounded-t-xl h-16 border-t border-outline-variant/10">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-[10px]">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-4 py-1 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-label-md text-[10px]">Chat</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-md text-[10px]">Funds</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-[10px]">Profile</span>
+</div>
+</nav>
+<script>
+        // Micro-interaction for the textarea auto-resize
+        const tx = document.getElementsByTagName("textarea");
+        for (let i = 0; i < tx.length; i++) {
+            tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+            tx[i].addEventListener("input", OnInput, false);
+        }
+
+        function OnInput() {
+            this.style.height = 0;
+            this.style.height = (this.scrollHeight) + "px";
+        }
+
+        // Simulating some focus states and smooth entrance
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatContainer = document.querySelector('.chat-scroll');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        });
+    </script>
+</body></html>
